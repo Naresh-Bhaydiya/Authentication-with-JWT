@@ -71,3 +71,8 @@ class BookAPI(APIView):
             }            
             return Response({"status":status.HTTP_200_OK,"Data":response_data})
         return Response({"message":"details not found !"},status=status.HTTP_404_NOT_FOUND)
+    
+    def get(self,request):
+        books = Book.objects.all().order_by('-id')[:5]
+        serializer = BookSerializer(books,many=True)
+        return Response({"status":status.HTTP_200_OK,"Data":serializer.data})
