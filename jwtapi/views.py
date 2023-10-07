@@ -45,7 +45,7 @@ class loginAPI(APIView):
         authenticate_user = authenticate(username=data['username'], password=data['password'])
         if authenticate_user is not None:
             user = User.objects.get(username=data['username'])
-            serializer = UserSerializer(user)
+            serializer = LoginSerializer(user)
             token = get_tokens_for_user(user=user)
             response_data = {
                 "user": serializer.data,
